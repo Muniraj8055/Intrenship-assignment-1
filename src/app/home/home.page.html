@@ -1,20 +1,95 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title> User Details </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content>
+  <div class="ion-padding">
+    <form [formGroup]="registrationForm" (ngSubmit)="submit()">
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">Name</ion-label>
+          <ion-input
+            autocapitalize
+            inputmode="text"
+            formControlName="name"
+          ></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.name">
+          <ng-container
+            *ngIf="name.hasError(error.type) && (name.dirty || name.touched)"
+          >
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <ion-item>
+          <ion-label position="floating">Phone</ion-label>
+          <ion-input inputmode="tel" formControlName="phone"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.phone">
+          <ng-container
+            *ngIf="phone.hasError(error.type) && (phone.dirty || phone.touched)"
+          >
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input inputmode="email" formControlName="email"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.email">
+          <ng-container
+            *ngIf="email.hasError(error.type) && (email.dirty || email.touched)"
+          >
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+      </ion-list>
+      <ion-list formGroupName="address">
+        <ion-list-header>
+          <ion-label>Address</ion-label>
+        </ion-list-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+        <ion-item>
+          <ion-label position="floating">City</ion-label>
+          <ion-input formControlName="city"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.city">
+          <ng-container
+            *ngIf="city.hasError(error.type) && (city.dirty || city.touched)"
+          >
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <ion-item>
+          <ion-label position="floating">State</ion-label>
+          <ion-input formControlName="state"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.state">
+          <ng-container
+            *ngIf="state.hasError(error.type) && (state.dirty || state.touched)"
+          >
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <ion-item>
+          <ion-label position="floating">Pin Code</ion-label>
+          <ion-input formControlName="zip"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.zip">
+          <ng-container
+            *ngIf="zip.hasError(error.type) && (zip.dirty || zip.touched)"
+          >
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+      </ion-list>
+      <ion-button
+        [disabled]="!registrationForm.valid"
+        type="submit"
+        expand="block"
+        >Submit <ion-icon slot="end" name="create"> </ion-icon>
+      </ion-button>
+    </form>
   </div>
 </ion-content>
